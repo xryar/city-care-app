@@ -41,7 +41,7 @@ export default class Camera {
     }
 
     #initialListener() {
-        this.#videoElement.oncanPlay = () => {
+        this.#videoElement.oncanplay = () => {
             if (this.#streaming) {
                 return;
             }
