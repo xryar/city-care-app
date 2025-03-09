@@ -222,7 +222,7 @@ export default class NewPage {
       const image = await this.#camera.takePicture();
       await this.#addTakenPicture(image);
       await this.#populateTakenPictures();
-      // alert(URL.createObjectURL(image));
+      alert(URL.createObjectURL(image));
     });
   }
 
