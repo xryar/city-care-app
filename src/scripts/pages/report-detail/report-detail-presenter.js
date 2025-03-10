@@ -1,3 +1,5 @@
+import { reportMapper } from '../../data/api-mapper';
+
 export default class ReportDetailPresenter {
   #reportId;
   #view;
@@ -31,7 +33,10 @@ export default class ReportDetailPresenter {
         return;
       }
 
-      this.#view.populateReportDetailAndInitialMap(response.message, response.data);
+      const report = await reportMapper(response.data);
+      console.log(report);
+
+      this.#view.populateReportDetailAndInitialMap(response.message, report);
     } catch (error) {
       console.error('showReportDetailAndMap: error:', error);
       this.#view.populateReportDetailError(error.message);

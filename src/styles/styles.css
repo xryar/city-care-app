@@ -555,6 +555,7 @@ header {
 }
 
 .report-detail__createdat,
+.report-detail__location__place-name,
 .report-detail__location__latitude,
 .report-detail__location__longitude,
 .report-detail__author {
@@ -564,6 +565,7 @@ header {
 }
 
 .report-detail__createdat::after,
+.report-detail__location__place-name::after,
 .report-detail__location__latitude::after,
 .report-detail__location__longitude::after,
 .report-detail__author::after {

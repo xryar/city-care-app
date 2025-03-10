@@ -11,11 +11,13 @@ import {
 import { createCarousel } from '../../utils';
 import ReportDetailPresenter from './report-detail-presenter';
 import { parseActivePathname } from '../../routes/url-parser';
+import Map from '../../utils/map';
 import * as CityCareAPI from '../../data/api';
 
 export default class ReportDetailPage {
   #presenter = null;
   #form = null;
+  #map = null;
 
   async render() {
     return `
@@ -68,6 +70,7 @@ export default class ReportDetailPage {
       evidenceImages: report.evidenceImages,
       latitudeLocation: report.location.latitude,
       longitudeLocation: report.location.longitude,
+      location: report.location,
       reporterName: report.reporter.name,
       createdAt: report.createdAt,
     });
@@ -77,6 +80,14 @@ export default class ReportDetailPage {
 
     // Map
     await this.#presenter.showReportDetailMap();
+    if (this.#map) {
+      const reportCoordinate = [report.location.latitude, report.location.longitude];
+      const markerOptions = { alt: report.title };
+      const popupOptions = { content: report.title };
+
+      this.#map.changeCamera(reportCoordinate);
+      this.#map.addMarker(reportCoordinate, markerOptions, popupOptions);
+    }
 
     // Actions buttons
     this.#presenter.showSaveButton();
@@ -122,6 +133,9 @@ export default class ReportDetailPage {
 
   async initialMap() {
     // TODO: map initialization
+    this.#map = await Map.build('#map', {
+      zoom: 15,
+    });
   }
 
   #setupForm() {
