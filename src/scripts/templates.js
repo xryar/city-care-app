@@ -189,8 +189,7 @@ export function generateReportDetailTemplate({
   description,
   damageLevel,
   evidenceImages,
-  latitudeLocation,
-  longitudeLocation,
+  location,
   reporterName,
   createdAt,
 }) {
@@ -209,10 +208,11 @@ export function generateReportDetailTemplate({
       <div class="report-detail__more-info">
         <div class="report-detail__more-info__inline">
           <div id="createdat" class="report-detail__createdat" data-value="${createdAtFormatted}"><i class="fas fa-calendar-alt"></i></div>
-        </div>
+          <div id="location-place-name" class="report-detail__location__place-name" data-value="${location.placeName}"><i class="fas fa-map"></i></div>
+          </div>
         <div class="report-detail__more-info__inline">
-          <div id="location-latitude" class="report-detail__location__latitude" data-value="${latitudeLocation}">Latitude:</div>
-          <div id="location-longitude" class="report-detail__location__longitude" data-value="${longitudeLocation}">Longitude:</div>
+          <div id="location-latitude" class="report-detail__location__latitude" data-value="${location.latitude}">Latitude:</div>
+          <div id="location-longitude" class="report-detail__location__longitude" data-value="${location.longitude}">Longitude:</div>
         </div>
         <div id="author" class="report-detail__author" data-value="${reporterName}">Dilaporkan oleh:</div>
       </div>
