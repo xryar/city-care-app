@@ -37,12 +37,28 @@ export default class NewPresenter {
         return;
       }
 
+      this.#notifyToAllUser(response.data.id);
+
       this.#view.storeSuccessfully(response.message, response.data);
     } catch (error) {
       console.error('postNewReport: error:', error);
       this.#view.storeFailed(error.message);
     } finally {
       this.#view.hideSubmitLoadingButton();
+    }
+  }
+
+  async #notifyToAllUser(reportId) {
+    try {
+      const response = await this.#model.sendReportToAllUserViaNotification(reportId);
+      if (!response.ok) {
+        console.error('#notifyToAllUser: response:', response);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error('#notifyToAllUser: error:', error);
+      return false;
     }
   }
 }
