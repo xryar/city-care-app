@@ -33,7 +33,6 @@ export default class BookmarkPage {
   }
 
   async afterRender() {
-    // TODO: initial presenter
     this.#presenter = new BookmarkPresenter({
       view: this,
       model: Database,
